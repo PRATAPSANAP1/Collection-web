@@ -24,7 +24,7 @@ const sec = process.env.secret_key;
 
 // CORS configuration
 app.use(cors({
-    origin: ['https://collection-web-phi.vercel.app', 'http://localhost:3000', 'http://127.0.0.1:5500', 'https://b2knfdbj-3400.inc1.devtunnels.ms'],
+    origin: ['https://collection-web-phi.vercel.app', 'https://shubhangi-collection-flax.vercel.app', 'http://localhost:3000', 'http://127.0.0.1:5500', 'https://b2knfdbj-3400.inc1.devtunnels.ms'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']

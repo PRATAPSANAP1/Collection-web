@@ -4,7 +4,7 @@ const isLocalhost =
 
 const API_BASE_URL = isLocalhost
   ? "http://localhost:3400" // local backend
-  : "https://backend-deploy-7btkno04d-pratap-sanaps-projects.vercel.app"; // hosted backend
+  : "https://backend-deploy-hrj3ptquk-pratap-sanaps-projects.vercel.app"; // hosted backend
 
 // make it globally accessible
 window.Backend_URL = API_BASE_URL;
