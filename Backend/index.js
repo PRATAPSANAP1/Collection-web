@@ -4,6 +4,7 @@ const express=require("express");
 const path=require("path");
 const jwt = require('jsonwebtoken');
 const cookieParser = require("cookie-parser");
+const cors = require('cors');
 
 const route=require("./Routes/userRoutes");
 const product_route=require("./Routes/productRoute");
@@ -20,6 +21,14 @@ const feed=require("./Routes/feed");
 const app=express();
 
 const sec = process.env.secret_key;
+
+// CORS configuration
+app.use(cors({
+    origin: ['https://collection-web-phi.vercel.app', 'http://localhost:3000', 'http://127.0.0.1:5500', 'https://b2knfdbj-3400.inc1.devtunnels.ms'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
+}));
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
@@ -172,7 +181,34 @@ app.use("/website-content",web);
 
 app.use("/feedback",feed);
 
+// Debug route to list all routes
+app.get('/debug/routes', (req, res) => {
+    res.json({
+        routes: [
+            '/product/getTableData',
+            '/category/sendCategory',
+            '/website-content',
+            '/api/*',
+            '/dashboard/*',
+            '/cart/*',
+            '/wish/*',
+            '/order/*'
+        ]
+    });
+});
 
+// 404 handler for API routes
+app.use('/api/*', (req, res) => {
+    res.status(404).json({ error: 'API endpoint not found', path: req.path });
+});
+
+app.use('/category/*', (req, res) => {
+    res.status(404).json({ error: 'Category endpoint not found', path: req.path });
+});
+
+app.use('/product/*', (req, res) => {
+    res.status(404).json({ error: 'Product endpoint not found', path: req.path });
+});
 
 app.get('/:page', (req, res) => {
     console.log("hello world");
